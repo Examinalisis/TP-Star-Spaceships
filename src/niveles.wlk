@@ -71,7 +71,7 @@ object instrucciones{
 		keyboard.enter().onPressDo{seleccionEscenarios.iniciar()}
 		
 		
-	}
+	}//
 }
 
 object seleccionEscenarios{
