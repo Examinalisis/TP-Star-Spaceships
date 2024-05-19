@@ -29,7 +29,7 @@ class Jugador
 	}
 	method sinEnergia() = energia <= 0
 	
-	method validarEnergia(gasto){
+	method validarEnergia(){
 		game.errorReporter(self.nave())
 		if (self.sinEnergia()) {throw new Exception(message="Sin Energia")}
 	}
