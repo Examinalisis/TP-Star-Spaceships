@@ -77,9 +77,9 @@ object instrucciones{
 object seleccionEscenarios{
 	var property cualFondo
 	const property marco3 = new Marco(position = game.at(2,3), image = "marco3.png", x1 = 2, x2 = 16)
-	method bosque()		  = new Escenario(escenario = new NivelUno(), position = game.at(2,3), image = "bosqueSmall.png", sonidoDeFondo = "track1.mp3" )
+	method space()		  = new Escenario(escenario = new NivelUno(), position = game.at(2,3), image = "spaceSmall.png", sonidoDeFondo = "track1.mp3" )
 	method desierto()	  = new Escenario(escenario = new NivelDos(), position = game.at(6,3), image = "desiertoSmall.png", sonidoDeFondo = "track2.mp3")
-	method castillo()	  = new Escenario(escenario = new NivelTres(), position = game.at(10,3), image = "castilloSmall.png", sonidoDeFondo = "track3.mp3")
+	method pinkNebula()	  = new Escenario(escenario = new NivelTres(), position = game.at(10,3), image = "pinknebulaSmall.png", sonidoDeFondo = "track3.mp3")
 	method futuro() 	  = new Escenario(escenario = new NivelCuatro(), position = game.at(14,3), image = "futureSmall.png", sonidoDeFondo = "track4.mp3")
 	
 	method iniciar(){
@@ -90,9 +90,9 @@ object seleccionEscenarios{
 	}
 	
 	method agregarEscenarios(){
-		game.addVisual(self.bosque())
+		game.addVisual(self.space())
 		game.addVisual(self.desierto())
-		game.addVisual(self.castillo())
+		game.addVisual(self.pinkNebula())
 		game.addVisual(self.futuro())
 		game.addVisual(marco3)//y agregamos marco ya que estamos
 	}

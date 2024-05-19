@@ -1,11 +1,11 @@
 import wollok.game.*
+
 class Plataforma {
 	const property position
-	method image() = "plataforma.png"
 	method subir(nave)
 	{
 		nave.estaEnElSuelo()
-		nave.position(nave.position().up(1))
+		//nave.position(nave.position().up(1))
 	}
 	method interaccionCon(jugador)
 	{
@@ -20,18 +20,27 @@ class Pared inherits Plataforma{
 		self.repeler(nave)
 	}
 	method repeler(nave){
-		nave.direccion().repelerADireccionOpuesta(nave)
+		nave.direccion().repeler(nave)
 	}
 }
 
 class DivisionVertical inherits Pared{
-	override method image()="invisible.png"	
+	override method repeler(nave){
+		nave.direccion().repelerADireccionOpuesta(nave)
+	}
 }
 
 class Techo inherits Pared
 {
 	override method repeler(nave){
 		nave.position(nave.position().down(1))
+	}
+}
+
+class Suelo inherits Pared
+{
+	override method repeler(nave){
+		nave.position(nave.position().up(1))
 	}
 }
 
@@ -50,7 +59,12 @@ class Nivel{
 	method crearTecho(){
 		(0..game.width()).forEach({numero => plataformas.add(new Techo(position=game.at(numero,game.height())))})
 	}
-	method nuevoSuelo(){
+	
+	method crearSuelo(){
+		(0..game.width()).forEach({numero => plataformas.add(new Suelo(position=game.at(numero,-1)))})
+	}
+	
+	method agregarPlataformas(){
 		plataformas.forEach({p => game.addVisual(p)})			
 	}
 	
@@ -60,9 +74,11 @@ class Nivel{
 	
 	method limitesInvisibles(){
 		self.crearTecho()
-		self.crearPared(0,game.height(),-1)
-		self.crearPared(0,game.height(),game.width())
-		self.divisionVertical(game.height(),-1,10)
+		self.crearSuelo()
+		self.divisionVertical(game.height(),0,10)
+		self.crearPared(-1,game.height(),-1)
+		self.crearPared(-1,game.height(),game.width())
+		
 		}
 }
 
@@ -72,9 +88,8 @@ class NivelUno inherits Nivel
 	method creoPlataformas()
 	{
 		self.limitesInvisibles()
-		self.crearPlataforma(0,game.width(),0)
-		self.crearPlataforma(game.center().x()-2,game.center().x()+2,5)
-		self.nuevoSuelo()
+		self.agregarPlataformas()
+		
 	}
 }
 
@@ -83,10 +98,8 @@ class NivelDos inherits Nivel {
 	method creoPlataformas()
 	{
 		self.limitesInvisibles()
-		self.crearPlataforma(0,game.width(),0)
-		self.crearPlataforma(game.center().x()-1,game.center().x()-3,3)
-		self.crearPlataforma(game.center().x()+7,game.center().x()+4,3)
-		self.nuevoSuelo()
+		self.agregarPlataformas()
+		
 	}
 }
 
@@ -95,11 +108,7 @@ class NivelTres inherits Nivel {
 	method creoPlataformas()
 	{
 		self.limitesInvisibles()
-		self.crearPlataforma(0,game.width(),0)
-		self.crearPlataforma(game.center().x()-4,game.center().x()-2,7)
-		self.crearPlataforma(game.center().x()+4,game.center().x()+2,7)
-		self.crearPlataforma(game.center().x()-2,game.center().x()+2,2)
-		self.nuevoSuelo()
+		self.agregarPlataformas()		
 	}
 }
 
@@ -108,16 +117,6 @@ class NivelCuatro inherits Nivel {
 	method creoPlataformas()
 	{
 		self.limitesInvisibles()
-		self.crearPlataforma(0,game.width(),0)
-		self.crearPlataforma(1,game.center().x(),2)
-		self.crearPlataforma(game.center().x(),game.width()-2,2)
-		self.crearPlataforma(0,game.center().x()-2,4)
-		self.crearPlataforma(game.center().x()+2,game.width()-1,4)
-		self.crearPlataforma(1,game.center().x(),6)
-		self.crearPlataforma(game.center().x(),game.width()-2,6)
-		self.crearPlataforma(0,game.center().x()-2,8)
-		self.crearPlataforma(game.center().x()+2,game.width()-1,8)
-		self.crearPared(0,game.height(),game.center().x())
-		self.nuevoSuelo()
+		self.agregarPlataformas()
 	}
 }

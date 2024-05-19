@@ -29,7 +29,7 @@ class Jugador
 	}
 	method sinEnergia() = energia <= 0
 	
-	method validarEnergia(){
+	method validarEnergia(gasto){
 		game.errorReporter(self.nave())
 		if (self.sinEnergia()) {throw new Exception(message="Sin Energia")}
 	}
@@ -47,7 +47,7 @@ object jugador1 inherits Jugador(nave = null){
 	{
 		keyboard.a().onPressDo({nave.moverIzquierda()})
 		keyboard.d().onPressDo({nave.moverDerecha()})
-		keyboard.w().onPressDo({nave.volar()})
+		keyboard.w().onPressDo({nave.moverArriba()})
 		keyboard.j().onPressDo({nave.disparo1()})
 		keyboard.k().onPressDo({nave.disparo2()})
 		game.onTick(500,"caida",{=> nave.caer()})
@@ -65,10 +65,11 @@ object jugador2 inherits Jugador(nave = null){
 	{
 		keyboard.left().onPressDo({nave.moverIzquierda()})
 		keyboard.right().onPressDo({nave.moverDerecha()})
-		keyboard.up().onPressDo({nave.volar()})
-		game.onTick(500,"caida",{=> nave.caer()})
+		keyboard.up().onPressDo({nave.moverArriba()})
+		keyboard.down().onPressDo({nave.moverAbajo()})
 		keyboard.z().onPressDo({nave.disparo1()})
 		keyboard.x().onPressDo({nave.disparo2()})
+		game.onTick(500,"caida",{=> nave.caer()})
 	}
 	
 	override method asignarNave() {
@@ -94,19 +95,31 @@ class Nave
 	method moverDerecha()
 	{
 		position = self.position().right(1)
-		direccion = derecha
+		
 	}
 	method moverIzquierda()
 	{
 		position = self.position().left(1)
-		direccion = izquierda
+		
+	}
+	
+	method moverAbajo()
+	{
+		position = self.position().down(1)
+		
+	}
+	
+	method moverArriba()
+	{
+		position = self.position().up(1)
+		
 	}
 	
 	method interaccionCon(otroJugador){}
 	
 	method gastarEnergia(gastoEnergetico){
-		jugador.validarEnergia()
-		jugador.gastarEnergia(gastoEnergetico)
+		    jugador.validarEnergia()
+			jugador.gastarEnergia(gastoEnergetico)
 	}
 	
 	//Metodos para volar y caer	
@@ -114,11 +127,6 @@ class Nave
 	
 	method estaEnElSuelo() {estadoVertical = suelo}
 	
-	method volar()
-	{
-		self.gastarEnergia(10)
-		position = self.position().up(2)
-	}
 	method caer() //Cuando dejé de volar
 	{
 		 if(not self.enElSuelo())

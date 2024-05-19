@@ -37,12 +37,15 @@ object derecha
 	method nombre() = "der"
 	method comportamientoDireccional(disparo){disparo.comportamientoDerecha()}
 	method repelerADireccionOpuesta(personaje){personaje.moverIzquierda()}
+	method repeler(personaje){personaje.moverDerecha()}
+	
 }
 object izquierda
 {
 	method nombre() = "izq"
 	method comportamientoDireccional(disparo){disparo.comportamientoIzquierda()}
 	method repelerADireccionOpuesta(personaje){personaje.moverDerecha()}
+	method repeler(personaje){personaje.moverIzquierda()}
 }
 
 object reposo
@@ -70,7 +73,7 @@ class PocionEnergia
 	var posicionInicial = self.cambiarPosicionEnX()
 	method cambiarPosicionEnX() = 0.randomUpTo(game.width())
 	method image() = "pocion.png"
-	method position() = game.at(posicionInicial,1)
+	method position() = game.at(posicionInicial,0)
 	method agregarPocion()
 	{
 		posicionInicial = self.cambiarPosicionEnX()
