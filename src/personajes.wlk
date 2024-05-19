@@ -41,7 +41,7 @@ class Jugador
 }
 
 object jugador1 inherits Jugador(nave = null){
-	override method posicionInicial() = game.at(0,1)
+	override method posicionInicial() = game.at(0,0)
 	override method direccionInicial() = derecha
 	override method controles()
 	{
@@ -78,7 +78,7 @@ object jugador2 inherits Jugador(nave = null){
 	}
 }
 
-//Naves jugables
+
 class Nave
 {
 	var property direccion = derecha //La orientacion a donde la nave está apuntando. Puede ser izquierda (izq) o derecha (der)
