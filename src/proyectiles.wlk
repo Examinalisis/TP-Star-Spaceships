@@ -58,11 +58,11 @@ class Disparo
 	}
 	method comportamientoIzquierda()
 	{
-		game.onTick(100,etiquetaTickMovement,{=> self.moverIzq()})
+		game.onTick(50,etiquetaTickMovement,{=> self.moverIzq()})
 	}
 	method comportamientoDerecha()
 	{
-		game.onTick(100,etiquetaTickMovement,{=> self.moverDer()})
+		game.onTick(50,etiquetaTickMovement,{=> self.moverDer()})
 	}
 	method subir(nave){}
 }
@@ -156,7 +156,10 @@ class Rifle inherits Armamento{
 				self.dispararProyectil(personaje,new Disparo(position = personaje.position(),imagen=self.image(personaje)))
 				game.schedule(100,{
 					self.dispararProyectil(personaje,new Disparo(position = personaje.position(),imagen=self.image(personaje)))
-					self._cooldown()
+					game.schedule(100,{ 
+						self.dispararProyectil(personaje,new Disparo(position = personaje.position(),imagen=self.image(personaje)))
+						self._cooldown()
+					})
 				})
 			})
 	}

@@ -48,8 +48,8 @@ object jugador1 inherits Jugador(nave = null){
 		keyboard.a().onPressDo({nave.moverIzquierda()})
 		keyboard.d().onPressDo({nave.moverDerecha()})
 		keyboard.w().onPressDo({nave.moverArriba()})
-		keyboard.j().onPressDo({nave.disparo1()})
-		keyboard.k().onPressDo({nave.disparo2()})
+		keyboard.z().onPressDo({nave.disparo1()})
+		keyboard.x().onPressDo({nave.disparo2()})
 		game.onTick(500,"caida",{=> nave.caer()})
 	}
 	
@@ -67,8 +67,8 @@ object jugador2 inherits Jugador(nave = null){
 		keyboard.right().onPressDo({nave.moverDerecha()})
 		keyboard.up().onPressDo({nave.moverArriba()})
 		keyboard.down().onPressDo({nave.moverAbajo()})
-		keyboard.z().onPressDo({nave.disparo1()})
-		keyboard.x().onPressDo({nave.disparo2()})
+		keyboard.j().onPressDo({nave.disparo1()})
+		keyboard.k().onPressDo({nave.disparo2()})
 		game.onTick(500,"caida",{=> nave.caer()})
 	}
 	
