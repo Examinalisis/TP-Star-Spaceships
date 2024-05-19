@@ -48,7 +48,7 @@ class Disparo
 	//Si un proyectil no colisiona, se autodestruye en 1000 ticks
 	method automaticSelfDestruction()
 	{
-			game.schedule(1000,{self.detenerMovimiento()})
+			game.schedule(1500,{self.detenerMovimiento()})
 	}
 	
 	
@@ -124,6 +124,7 @@ class DisparoDiagonalInferior inherits DisparoDiagonal
 
 
 
+
 //Armamentos
 class Armamento
 {
@@ -141,6 +142,40 @@ class Armamento
 		self.dispararProyectil(_chara,proyectil)
 	}
 }
+
+class Rifle inherits Armamento{
+	var property contador = 18//Sin implementar para energía de cargas
+	var cooldown = 1
+	
+	override method dispararProyectil1(personaje){
+		
+			cooldown = 0
+			if(not self.vacio() and cooldown == 1)
+			self.dispararProyectil(personaje,new Disparo(position = personaje.position(),imagen=self.image(personaje)))
+			game.schedule(100,{
+				self.dispararProyectil(personaje,new Disparo(position = personaje.position(),imagen=self.image(personaje)))
+				game.schedule(100,{
+					self.dispararProyectil(personaje,new Disparo(position = personaje.position(),imagen=self.image(personaje)))
+					self._cooldown()
+				})
+			})
+	}
+	
+	override method dispararProyectil( personaje,proyectil){
+		super(personaje,proyectil)
+		contador = contador - 1	
+	}
+	
+	method vacio(){return contador == 0}
+	
+	method _cooldown(){
+		game.schedule(600,{=> cooldown = 1})
+	}
+	
+	method recargar(){contador = contador + 12}
+
+}
+
 
 object armamentoZipmata inherits Armamento
 {
@@ -166,4 +201,8 @@ object armamentoEagleMan inherits Armamento
 		const proyectil = new DisparoDiagonalInferior(position = _chara.position(),imagen=self.image(_chara))
 		self.dispararProyectil(_chara,proyectil)
 	}
+}
+
+object rifle inherits Rifle{
+	
 }

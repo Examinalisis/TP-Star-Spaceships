@@ -164,7 +164,7 @@ class Zipmata inherits Nave(armamento = armamentoZipmata)
 	override method nombre() = "temp_"
 }
 
-class EagleMan inherits Nave(armamento = armamentoEagleMan)
+class EagleMan inherits Nave(armamento = rifle)//Eagle man lleva el rifle en disparo Base.
 {
 	override method nombre() = "eag_"
 }

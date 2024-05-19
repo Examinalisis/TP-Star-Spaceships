@@ -1,6 +1,6 @@
 import wollok.game.*
 
-class Plataforma {
+class Plataforma {//No elimine la clase pero ahora solo uso paredes
 	const property position
 	method subir(nave)
 	{
@@ -14,10 +14,10 @@ class Plataforma {
 	}
 }
 
-class Pared inherits Plataforma{
+class Pared inherits Plataforma{//La pared ahora es object invisible sin image
 	override method interaccionCon(jugador){
 		const nave = jugador.nave()
-		self.repeler(nave)
+		self.repeler(nave)//Como siempre está atrás del jugador tiene que repeler en la misma dirección, no la contraria
 	}
 	method repeler(nave){
 		nave.direccion().repeler(nave)
@@ -26,7 +26,7 @@ class Pared inherits Plataforma{
 
 class DivisionVertical inherits Pared{
 	override method repeler(nave){
-		nave.direccion().repelerADireccionOpuesta(nave)
+		nave.direccion().repelerADireccionOpuesta(nave)//La pared del medio tiene que reper en la dirección opuesta porque está de frente
 	}
 }
 
@@ -60,19 +60,19 @@ class Nivel{
 		(0..game.width()).forEach({numero => plataformas.add(new Techo(position=game.at(numero,game.height())))})
 	}
 	
-	method crearSuelo(){
+	method crearSuelo(){//El suelo ahora se crea y es una clase
 		(0..game.width()).forEach({numero => plataformas.add(new Suelo(position=game.at(numero,-1)))})
 	}
 	
-	method agregarPlataformas(){
+	method agregarPlataformas(){//antes el suelo cargaba ahora carga todo el nivel
 		plataformas.forEach({p => game.addVisual(p)})			
 	}
 	
-	method divisionVertical(inicio,fin,posicionEnX){
+	method divisionVertical(inicio,fin,posicionEnX){//Pared del medio
 		(inicio..fin).forEach({numero => plataformas.add(new DivisionVertical(position=game.at(posicionEnX,numero)))})
 	}
 	
-	method limitesInvisibles(){
+	method limitesInvisibles(){//Crea todos los límites de pantalla. Estan en -1 para no perder la posición 0
 		self.crearTecho()
 		self.crearSuelo()
 		self.divisionVertical(game.height(),0,10)
