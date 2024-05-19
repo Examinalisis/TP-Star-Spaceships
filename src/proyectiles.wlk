@@ -172,7 +172,7 @@ class Rifle inherits Armamento{
 		game.schedule(600,{=> cooldown = 1})
 	}
 	
-	method recargar(){contador = contador + 12}
+	method recargar(){contador = contador + 12}//
 
 }
 
