@@ -70,13 +70,14 @@ object ataque
 class PocionEnergia
 {
 	const energiaQueRestaura = 10
-	var posicionInicial = self.cambiarPosicionEnX()
+	var posicionInicial
 	method cambiarPosicionEnX() = 0.randomUpTo(game.width())
+	method cambiarPosicionEnY() = 0.randomUpTo(game.height())
 	method image() = "pocion.png"
-	method position() = game.at(posicionInicial,0)
+	method position() = posicionInicial
 	method agregarPocion()
 	{
-		posicionInicial = self.cambiarPosicionEnX()
+		posicionInicial =game.at(self.cambiarPosicionEnX(),self.cambiarPosicionEnY())
 		game.addVisual(self)
 	}
 	method regenerarPocion()

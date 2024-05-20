@@ -147,17 +147,22 @@ class Rifle inherits Armamento{
 	var property contador = 18//Sin implementar para energía de cargas
 	var cooldown = 1
 	
-	override method dispararProyectil1(personaje){
+	
+	method balaInit(personaje)=if(personaje.direccion()==derecha){return new Disparo(position=personaje.position().right(1),imagen=self.image(personaje))}
+	else{return new Disparo(position=personaje.position().left(1),imagen=self.image(personaje))}
+	
+	
+	 method dispararProyectil2(personaje){
 		
 			cooldown = 0
 			if(not self.vacio() and cooldown == 1)
-			self.dispararProyectil(personaje,new Disparo(position = personaje.position(),imagen=self.image(personaje)))
+			self.dispararProyectil(personaje,self.balaInit(personaje))
 			game.schedule(100,{
-				self.dispararProyectil(personaje,new Disparo(position = personaje.position(),imagen=self.image(personaje)))
+				self.dispararProyectil(personaje,self.balaInit(personaje))
 				game.schedule(100,{
-					self.dispararProyectil(personaje,new Disparo(position = personaje.position(),imagen=self.image(personaje)))
+					self.dispararProyectil(personaje,self.balaInit(personaje))
 					game.schedule(100,{ 
-						self.dispararProyectil(personaje,new Disparo(position = personaje.position(),imagen=self.image(personaje)))
+						self.dispararProyectil(personaje,self.balaInit(personaje))
 						self._cooldown()
 					})
 				})

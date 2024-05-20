@@ -41,16 +41,17 @@ class Jugador
 }
 
 object jugador1 inherits Jugador(nave = null){
+	const property boundsPlayer=boundsP1
 	override method posicionInicial() = game.at(0,0)
 	override method direccionInicial() = derecha
 	override method controles()
 	{
-		keyboard.a().onPressDo({nave.moverIzquierda()})
-		keyboard.d().onPressDo({nave.moverDerecha()})
-		keyboard.w().onPressDo({nave.moverArriba()})
+		keyboard.a().onPressDo({if(boundsPlayer.left(nave))nave.moverIzquierda()})
+		keyboard.d().onPressDo({if(boundsPlayer.right(nave))nave.moverDerecha()})
+		keyboard.w().onPressDo({if(boundsPlayer.up(nave))nave.moverArriba()})
 		keyboard.z().onPressDo({nave.disparo1()})
 		keyboard.x().onPressDo({nave.disparo2()})
-		game.onTick(500,"caida",{=> nave.caer()})
+		game.onTick(500,"caida",{=> nave.caer(boundsPlayer)})
 	}
 	
 	override method asignarNave() {
@@ -59,17 +60,19 @@ object jugador1 inherits Jugador(nave = null){
 }
 
 object jugador2 inherits Jugador(nave = null){
+	
+	const property boundsPlayer=boundsP2
 	override method posicionInicial() = game.at(game.width()-1,0)
 	override method direccionInicial() = izquierda
 	override method controles()
 	{
-		keyboard.left().onPressDo({nave.moverIzquierda()})
-		keyboard.right().onPressDo({nave.moverDerecha()})
-		keyboard.up().onPressDo({nave.moverArriba()})
-		keyboard.down().onPressDo({nave.moverAbajo()})
+		keyboard.left().onPressDo({if(boundsPlayer.left(nave))nave.moverIzquierda()})
+		keyboard.right().onPressDo({if(boundsPlayer.right(nave))nave.moverDerecha()})
+		keyboard.up().onPressDo({if(boundsPlayer.up(nave))nave.moverArriba()})
+		//keyboard.down().onPressDo(if(boundsPlayer.down(nave)){nave.moverAbajo()})
 		keyboard.j().onPressDo({nave.disparo1()})
 		keyboard.k().onPressDo({nave.disparo2()})
-		game.onTick(500,"caida",{=> nave.caer()})
+		game.onTick(500,"caida",{=> nave.caer(boundsPlayer)})
 	}
 	
 	override method asignarNave() {
@@ -93,28 +96,33 @@ class Nave
 	method image()= self.nombre() + direccion.nombre() + estado.nombre() + ".png"
 	
 	method moverDerecha()
-	{
-		position = self.position().right(1)
+	{	
+				
+			position = self.position().right(1)			
 		
 	}
+	
 	method moverIzquierda()
 	{
-		position = self.position().left(1)
+	
+			position = self.position().left(1)
 		
 	}
 	
 	method moverAbajo()
 	{
-		position = self.position().down(1)
+			position = self.position().down(1)
+			
 		
 	}
 	
 	method moverArriba()
 	{
-		position = self.position().up(1)
+	
+			position = self.position().up(1)			
 		
 	}
-	
+		
 	method interaccionCon(otroJugador){}
 	
 	method gastarEnergia(gastoEnergetico){
@@ -127,9 +135,9 @@ class Nave
 	
 	method estaEnElSuelo() {estadoVertical = suelo}
 	
-	method caer() //Cuando dejé de volar
+	method caer(bounds) //Cuando dejé de volar
 	{
-		 if(not self.enElSuelo())
+		 if(bounds.down(self))
 		 {
 		 	position = self.position().down(1)
 		 }

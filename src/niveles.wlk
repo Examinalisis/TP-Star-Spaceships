@@ -227,7 +227,7 @@ object batalla
 		//game.sound("track0.mp3").pause()
 		fondoElegido.sonido(escenarioElegido.sonidoDeFondo())
 		
-		escenarioElegido.escenario().creoPlataformas()
+		
 		visualesGeneral.agregar()
 		jugador1.controles()
 		jugador2.controles()
