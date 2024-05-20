@@ -152,25 +152,25 @@ class Rifle inherits Armamento{
 	else{return new Disparo(position=nave.position().left(1),imagen=self.image(nave))}
 	
 	
-	 method dispararProyectil2(personaje){
+	 method dispararProyectil2(nave){
 		
 			cooldown = 0
 			if(not self.vacio() and cooldown == 1)
-			self.dispararProyectil(personaje,self.balaInit(personaje))
+			self.dispararProyectil(nave,self.balaInit(nave))
 			game.schedule(100,{
-				self.dispararProyectil(personaje,self.balaInit(personaje))
+				self.dispararProyectil(nave,self.balaInit(nave))
 				game.schedule(100,{
-					self.dispararProyectil(personaje,self.balaInit(personaje))
+					self.dispararProyectil(nave,self.balaInit(nave))
 					game.schedule(100,{ 
-						self.dispararProyectil(personaje,self.balaInit(personaje))
+						self.dispararProyectil(nave,self.balaInit(nave))
 						self._cooldown()
 					})
 				})
 			})
 	}
 	
-	override method dispararProyectil( personaje,proyectil){
-		super(personaje,proyectil)
+	override method dispararProyectil( nave,proyectil){
+		super(nave,proyectil)
 		contador = contador - 1	
 	}
 	
