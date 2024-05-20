@@ -144,7 +144,7 @@ class Armamento
 }
 
 class Rifle inherits Armamento{
-	var property contador = 18//Sin implementar para energía de cargas
+	var property contador = 18
 	var cooldown = 1
 	
 	
