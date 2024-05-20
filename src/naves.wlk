@@ -1,6 +1,6 @@
 import wollok.game.*
 import proyectiles.*
-import plataformas.*
+import pantallas.*
 import niveles.*
 import extras.*
 
@@ -49,9 +49,9 @@ object jugador1 inherits Jugador(nave = null){
 		keyboard.a().onPressDo({if(boundsPlayer.left(nave))nave.moverIzquierda()})
 		keyboard.d().onPressDo({if(boundsPlayer.right(nave))nave.moverDerecha()})
 		keyboard.w().onPressDo({if(boundsPlayer.up(nave))nave.moverArriba()})
+		keyboard.s().onPressDo({if(boundsPlayer.down(nave))nave.moverAbajo()})
 		keyboard.z().onPressDo({nave.disparo1()})
 		keyboard.x().onPressDo({nave.disparo2()})
-		game.onTick(500,"caida",{=> nave.caer(boundsPlayer)})
 	}
 	
 	override method asignarNave() {
@@ -69,10 +69,9 @@ object jugador2 inherits Jugador(nave = null){
 		keyboard.left().onPressDo({if(boundsPlayer.left(nave))nave.moverIzquierda()})
 		keyboard.right().onPressDo({if(boundsPlayer.right(nave))nave.moverDerecha()})
 		keyboard.up().onPressDo({if(boundsPlayer.up(nave))nave.moverArriba()})
-		//keyboard.down().onPressDo(if(boundsPlayer.down(nave)){nave.moverAbajo()})
+		keyboard.down().onPressDo({if(boundsPlayer.down(nave))nave.moverAbajo()})
 		keyboard.j().onPressDo({nave.disparo1()})
 		keyboard.k().onPressDo({nave.disparo2()})
-		game.onTick(500,"caida",{=> nave.caer(boundsPlayer)})
 	}
 	
 	override method asignarNave() {
@@ -130,19 +129,6 @@ class Nave
 			jugador.gastarEnergia(gastoEnergetico)
 	}
 	
-	//Metodos para volar y caer	
-	method enElSuelo() = estadoVertical == suelo
-	
-	method estaEnElSuelo() {estadoVertical = suelo}
-	
-	method caer(bounds) //Cuando dejé de volar
-	{
-		 if(bounds.down(self))
-		 {
-		 	position = self.position().down(1)
-		 }
-		 estadoVertical = aire
-	}
 	method disparo()
 	{
 		self.gastarEnergia(20)
@@ -162,17 +148,17 @@ class Nave
 }
 
 
-class PoolYui inherits Nave(armamento = armamentoYui)
+class Nave1 inherits Nave(armamento = armamentoNave1)
 {
-	override method nombre() = "elr_"
+	override method nombre() = "nave1_"
 }
 
-class Zipmata inherits Nave(armamento = armamentoZipmata)
+class Nave2 inherits Nave(armamento = armamentoNave2)
 {
-	override method nombre() = "temp_"
+	override method nombre() = "nave2_"
 }
 
-class EagleMan inherits Nave(armamento = rifle)//Eagle man lleva el rifle en disparo Base.
+class Nave3 inherits Nave(armamento = rifle)// lleva el rifle en disparo Base.
 {
-	override method nombre() = "eag_"
+	override method nombre() = "nave3_"
 }

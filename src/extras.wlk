@@ -1,5 +1,5 @@
 import wollok.game.*
-import personajes.*
+import naves.*
 
 class Vida
 {

@@ -148,8 +148,8 @@ class Rifle inherits Armamento{
 	var cooldown = 1
 	
 	
-	method balaInit(personaje)=if(personaje.direccion()==derecha){return new Disparo(position=personaje.position().right(1),imagen=self.image(personaje))}
-	else{return new Disparo(position=personaje.position().left(1),imagen=self.image(personaje))}
+	method balaInit(nave)=if(nave.direccion()==derecha){return new Disparo(position=nave.position().right(1),imagen=self.image(nave))}
+	else{return new Disparo(position=nave.position().left(1),imagen=self.image(nave))}
 	
 	
 	 method dispararProyectil2(personaje){
@@ -185,7 +185,7 @@ class Rifle inherits Armamento{
 }
 
 
-object armamentoZipmata inherits Armamento
+object armamentoNave1 inherits Armamento
 {
 	method dispararProyectil2(_chara)
 	{
@@ -194,7 +194,7 @@ object armamentoZipmata inherits Armamento
 	}
 }
 
-object armamentoYui inherits Armamento
+object armamentoNave2 inherits Armamento
 {
 	method dispararProyectil2(_chara)
 	{
@@ -202,7 +202,7 @@ object armamentoYui inherits Armamento
 		self.dispararProyectil(_chara,proyectil)
 	}
 }
-object armamentoEagleMan inherits Armamento
+object armamentoC inherits Armamento
 {
 	method dispararProyectil2(_chara)
 	{

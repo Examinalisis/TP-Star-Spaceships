@@ -1,6 +1,6 @@
 import wollok.game.*
-import personajes.*
-import plataformas.*
+import naves.*
+import pantallas.*
 import extras.*
 
 class Fondo{
@@ -53,7 +53,7 @@ class Escenario{
 }
 
 object portada{
-	const testeo = new Fondo(image="portada2.png")
+	const testeo = new Fondo(image="portada.png")
 	const intro = game.sound("intro.mp3")
 	method iniciar(){
 		game.addVisual(testeo)
@@ -78,20 +78,20 @@ object seleccionEscenarios{
 	var property cualFondo
 	const property marco3 = new Marco(position = game.at(2,3), image = "marco3.png", x1 = 2, x2 = 16)
 	method space()		  = new Escenario(escenario = new NivelUno(), position = game.at(2,3), image = "spaceSmall.png", sonidoDeFondo = "track1.mp3" )
-	method desierto()	  = new Escenario(escenario = new NivelDos(), position = game.at(6,3), image = "desiertoSmall.png", sonidoDeFondo = "track2.mp3")
+	method clouds()	  = new Escenario(escenario = new NivelDos(), position = game.at(6,3), image = "cloudsSmall.png", sonidoDeFondo = "track2.mp3")
 	method pinkNebula()	  = new Escenario(escenario = new NivelTres(), position = game.at(10,3), image = "pinknebulaSmall.png", sonidoDeFondo = "track3.mp3")
 	method futuro() 	  = new Escenario(escenario = new NivelCuatro(), position = game.at(14,3), image = "futureSmall.png", sonidoDeFondo = "track4.mp3")
 	
 	method iniciar(){
 		game.clear()
-		game.addVisual(new Fondo(image="negro.png"))
+		game.addVisual(new Fondo(image="escenario.png"))
 		self.agregarEscenarios()
 		self.agregarTeclas()
 	}
 	
 	method agregarEscenarios(){
 		game.addVisual(self.space())
-		game.addVisual(self.desierto())
+		game.addVisual(self.clouds())
 		game.addVisual(self.pinkNebula())
 		game.addVisual(self.futuro())
 		game.addVisual(marco3)//y agregamos marco ya que estamos
@@ -110,9 +110,9 @@ object seleccionEscenarios{
 }
 
 object seleccionNaves{
-	var property p1 = new PoolYui(position=game.at(5,4),jugador=null)
-	var property p2 = new Zipmata(position=game.at(7,4),jugador=null)
-	var property p3 = new EagleMan(position=game.at(9,4),jugador=null)
+	var property n1 = new Nave1(position=game.at(5,4),jugador=null)
+	var property n2 = new Nave2(position=game.at(7,4),jugador=null)
+	var property n3 = new Nave3(position=game.at(9,4),jugador=null)
 	
 	var property marco1 = new Marco(position = game.at(5,4), image = "marco1.png", x1 = 5, x2 = 10)
 	var property marco2 = new Marco(position = game.at(7,4), image = "marco2.png", x1 = 5, x2 = 10)
@@ -133,9 +133,9 @@ object seleccionNaves{
 	
 	method agregarNaves(){
 		game.addVisual(new Fondo(image="seleccion.png"))
-		game.addVisual(p1)
-		game.addVisual(p2)
-		game.addVisual(p3)
+		game.addVisual(n1)
+		game.addVisual(n2)
+		game.addVisual(n3)
 		game.addVisual(marco1)//y agregamos marcos ya que estamos
 		game.addVisual(marco2)
 	}
@@ -270,9 +270,9 @@ object final
 		keyboard.enter().onPressDo{portada.iniciar()}
 	}
 	method reiniciar(){
-		seleccionNaves.p1(baseDeDatos.bp1())
-		seleccionNaves.p2(baseDeDatos.bp2())
-		seleccionNaves.p3(baseDeDatos.bp3())
+		seleccionNaves.n1(baseDeDatos.bp1())
+		seleccionNaves.n2(baseDeDatos.bp2())
+		seleccionNaves.n3(baseDeDatos.bp3())
 
 
 		seleccionNaves.marco1(baseDeDatos.bmarco1())
@@ -292,9 +292,9 @@ object final
 	}
 }
 object  baseDeDatos{
-		method bp1() = new PoolYui(position=game.at(5,4),jugador=null)
-		method bp2() = new Zipmata(position=game.at(7,4),jugador=null)
-		method bp3() = new EagleMan(position=game.at(9,4),jugador=null)
+		method bp1() = new Nave1(position=game.at(5,4),jugador=null)
+		method bp2() = new Nave2(position=game.at(7,4),jugador=null)
+		method bp3() = new Nave3(position=game.at(9,4),jugador=null)
 
 		method bmarco1() = new Marco(position = game.at(5,4), image = "marco1.png", x1 = 5, x2 = 10)
 		method bmarco2() = new Marco(position = game.at(7,4), image = "marco2.png", x1 = 5, x2 = 10)

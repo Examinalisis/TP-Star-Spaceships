@@ -1,6 +1,6 @@
 import wollok.game.*
-import plataformas.*
-import personajes.*
+import pantallas.*
+import naves.*
 import niveles.*
 
 program juego
