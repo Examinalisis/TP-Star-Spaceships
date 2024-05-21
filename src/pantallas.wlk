@@ -1,7 +1,7 @@
 import wollok.game.*
 
-
-class  Bounds{/*Control límites de pantalla*/
+//Control límites de pantalla
+class  Bounds{
 	
 	method right(objeto)=objeto.position().x()<20
 	
@@ -15,22 +15,19 @@ class  Bounds{/*Control límites de pantalla*/
 		return self.right(objeto)and self.left(objeto)and self.up(objeto) and self.down(objeto)
 	}
 }
-
-object boundsP1 inherits Bounds{//Límites player uno pantalla división media
+//Límites player uno pantalla división media
+object boundsP1 inherits Bounds{
 	override method right(objeto){
 		return objeto.position().x()<10	
 	}
 }
-
-object boundsP2 inherits Bounds{//Límites player dos pantalla división media
+//Límites player dos pantalla división media
+object boundsP2 inherits Bounds{
 	override method left(objeto){
 		return objeto.position().x()>10	
 	}
 }
 
-
-
-// Los dejo x si quieren usarlos despues
 class Nivel{
 	
 }

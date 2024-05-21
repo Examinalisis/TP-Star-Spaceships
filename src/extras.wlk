@@ -1,5 +1,6 @@
 import wollok.game.*
 import naves.*
+import niveles.*
 
 class Vida
 {
@@ -70,7 +71,7 @@ object ataque
 class PocionEnergia
 {
 	const energiaQueRestaura = 10
-	var posicionInicial
+	var posicionInicial = 0
 	method cambiarPosicionEnX() = 0.randomUpTo(game.width())
 	method cambiarPosicionEnY() = 0.randomUpTo(game.height())
 	method image() = "pocion.png"
@@ -132,4 +133,8 @@ class EnergiaPng{
 
 object energia1Png inherits EnergiaPng(position = energia1){}
 object energia2Png inherits EnergiaPng(position = energia2){}
+<<<<<<< HEAD
 	
+=======
+	
+>>>>>>> 721f5e8b78904de5888b851dbc776c2e68094ada

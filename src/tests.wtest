@@ -1,14 +1,15 @@
 import wollok.game.*
+import extras.*
+import naves.*
 import niveles.*
-import plataformas.*
-import personajes.*
+import pantallas.*
 import proyectiles.*
 
 	const marco3 = new Marco(position = game.at(2,3), image = "marco3.png", x1 = 2, x2 = 16)
-	const bosque = new Escenario(escenario = new NivelUno(), position = game.at(2,3), image = "bosqueSmall.png", sonidoDeFondo = "track1.mp3" )
+	const space = new Escenario(escenario = new NivelUno(), position = game.at(2,3), image = "spaceSmall.png", sonidoDeFondo = "track1.mp3" )
 	
-	const poolYui = new PoolYui(position=game.at(5,4),jugador=null)
-	const zipMata = new Zipmata(position=game.at(7,4),jugador=null)
+	const n1 = new Nave1(position=game.at(5,4),jugador=null)
+	const n2 = new Nave2(position=game.at(7,4),jugador=null)
 	
 	const marco1 = new Marco(position = game.at(5,4), image = "marco1.png", x1 = 5, x2 = 10)
 	const marco2 = new Marco(position = game.at(7,4), image = "marco2.png", x1 = 5, x2 = 10)
@@ -17,60 +18,60 @@ describe "Modulo 1. Selección de background y naves" {
 
 	test "Selección de escenario BOSQUE" {
 	
-		game.addVisual(bosque)
+		game.addVisual(space)
 		game.addVisual(marco3)
-		assert.equals(game.uniqueCollider(marco3),bosque)
+		assert.equals(game.uniqueCollider(marco3),space)
 	
 	}
 	
 	test "Selección de naves" {
 		
-		game.addVisual(poolYui)
-		game.addVisual(zipMata)
+		game.addVisual(n1)
+		game.addVisual(n2)
 		game.addVisual(marco1)
 		game.addVisual(marco2)
 		
 		seleccionNaves.escogerNave(marco1)
 		seleccionNaves.escogerNave(marco2)
 		
-		assert.equals(seleccionNaves.escogerNave(marco1),poolYui)
-		assert.equals(seleccionNaves.escogerNave(marco2),zipMata)
+		assert.equals(seleccionNaves.escogerNave(marco1),n1)
+		assert.equals(seleccionNaves.escogerNave(marco2),n2)
 	}
 }
 
 describe "Gameplay" {	
 	method initialize(){
 		//Inicializa jugador 1
-		poolYui.jugador(jugador1)
-		jugador1.nave(poolYui)
-		poolYui.position(game.center())
-		game.addVisual(poolYui)
+		n1.jugador(jugador1)
+		jugador1.nave(n1)
+		n1.position(game.center())
+		game.addVisual(n1)
 		
 		//Inicializa jugador 2
-		zipMata.jugador(jugador2)
-		jugador2.nave(zipMata)
-		zipMata.position(game.center())
-		game.addVisual(zipMata)
-		zipMata.moverDerecha()
+		n2.jugador(jugador2)
+		jugador2.nave(n2)
+		n2.position(game.center())
+		game.addVisual(n2)
+		n2.moverDerecha()
 		
 		colisiones.validar()
 	}
 	
 	test "nave se queda sin energia"{
 		
-		poolYui.disparo1()
-		poolYui.disparo1()
-		poolYui.disparo1()
-		poolYui.disparo1()
-		poolYui.disparo1()
-		assert.throwsException({poolYui.disparo1()})
+		n1.disparo1()
+		n1.disparo1()
+		n1.disparo1()
+		n1.disparo1()
+		n1.disparo1()
+		assert.throwsException({n1.disparo1()})
 		assert.equals(jugador1.energia(),0)
 		assert.that(jugador1.sinEnergia())
 	}
 	
 	test "nave recibe daño"{
-		const disparoNormal = new Disparo(position=zipMata.position(),imagen="")
-		const disparoFuerte = new DisparoVertical(position=zipMata.position(),imagen="")
+		const disparoNormal = new Disparo(position=n2.position(),imagen="")
+		const disparoFuerte = new DisparoVertical(position=n2.position(),imagen="")
 		disparoNormal.haceDanio(jugador2)
 		assert.equals(90,jugador2.vidas())
 		disparoFuerte.haceDanio(jugador2)
@@ -79,4 +80,3 @@ describe "Gameplay" {
 	
 }
 
-/* describe "" {} */
