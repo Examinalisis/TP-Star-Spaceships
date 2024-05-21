@@ -133,6 +133,3 @@ class EnergiaPng{
 object energia1Png inherits EnergiaPng(position = energia1){}
 object energia2Png inherits EnergiaPng(position = energia2){}
 	
-//Cosas faltantes:
-//	sonidos faltantes
-//	cambiar skins de personajes y disparos
