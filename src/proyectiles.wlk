@@ -38,14 +38,14 @@ class Disparo
 		position = self.position().right(1)
 	}
 	
-	//Detiene el movimiento de los proyectiles
+	//Detiene el movimiento de los tiros
 	method detenerMovimiento()
 	{
 		game.removeTickEvent(etiquetaTickMovement)
 		game.removeVisual(self)
 	}
 	
-	//Si un proyectil no colisiona, se autodestruye en 1000 ticks
+	//Si un tiro no impacta, se autodestruye en 1000 ticks
 	method automaticSelfDestruction()
 	{
 			game.schedule(1500,{self.detenerMovimiento()})
@@ -93,7 +93,7 @@ class DisparoVertical inherits Disparo
 	}
 	
 }
-
+//Ver que le podemos poner para que sea una opción viable que dispare vertical
 class DisparoDiagonal inherits DisparoVertical
 {
 	override method comportamientoDerecha()
@@ -125,7 +125,7 @@ class DisparoDiagonalInferior inherits DisparoDiagonal
 
 
 
-//Armamentos
+//Armas
 class Armamento
 {
 	method image(_chara) = 	_chara.nombre() + "spell_" + _chara.direccion().nombre() + ".png"
