@@ -110,12 +110,12 @@ object seleccionEscenarios{
 }
 
 object seleccionNaves{
-	var property n1 = new Nave1(position=game.at(5,4),jugador=null)
-	var property n2 = new Nave2(position=game.at(7,4),jugador=null)
-	var property n3 = new Nave3(position=game.at(9,4),jugador=null)
+	var property n1 = new Nave1(position=game.at(7,4),jugador=null)
+	var property n2 = new Nave2(position=game.at(9,4),jugador=null)
+	var property n3 = new Nave3(position=game.at(11,4),jugador=null)
 	
-	var property marco1 = new Marco(position = game.at(5,4), image = "marco1.png", x1 = 5, x2 = 10)
-	var property marco2 = new Marco(position = game.at(7,4), image = "marco2.png", x1 = 5, x2 = 10)
+	var property marco1 = new Marco(position = game.at(7,4), image = "marco1.png", x1 = 7, x2 = 12)
+	var property marco2 = new Marco(position = game.at(9,4), image = "marco2.png", x1 = 7, x2 = 12)
 	
 	var property jugador1Ok = false
 	var property jugador2Ok = false
@@ -292,12 +292,12 @@ object final
 	}
 }
 object  baseDeDatos{
-		method bp1() = new Nave1(position=game.at(5,4),jugador=null)
-		method bp2() = new Nave2(position=game.at(7,4),jugador=null)
-		method bp3() = new Nave3(position=game.at(9,4),jugador=null)
+		method bp1() = new Nave1(position=game.at(7,4),jugador=null)
+		method bp2() = new Nave2(position=game.at(9,4),jugador=null)
+		method bp3() = new Nave3(position=game.at(11,4),jugador=null)
 
-		method bmarco1() = new Marco(position = game.at(5,4), image = "marco1.png", x1 = 5, x2 = 10)
-		method bmarco2() = new Marco(position = game.at(7,4), image = "marco2.png", x1 = 5, x2 = 10)
+		method bmarco1() = new Marco(position = game.at(7,4), image = "marco1.png", x1 = 5, x2 = 10)
+		method bmarco2() = new Marco(position = game.at(9,4), image = "marco2.png", x1 = 5, x2 = 10)
 		
 		method bjugadorOk() = false
 		
