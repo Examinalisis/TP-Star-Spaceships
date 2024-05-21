@@ -296,8 +296,8 @@ object  baseDeDatos{
 		method bp2() = new Nave2(position=game.at(9,4),jugador=null)
 		method bp3() = new Nave3(position=game.at(11,4),jugador=null)
 
-		method bmarco1() = new Marco(position = game.at(7,4), image = "marco1.png", x1 = 5, x2 = 10)
-		method bmarco2() = new Marco(position = game.at(9,4), image = "marco2.png", x1 = 5, x2 = 10)
+		method bmarco1() = new Marco(position = game.at(7,4), image = "marco1.png", x1 = 7, x2 = 12)
+		method bmarco2() = new Marco(position = game.at(9,4), image = "marco2.png", x1 = 7, x2 = 12)
 		
 		method bjugadorOk() = false
 		
